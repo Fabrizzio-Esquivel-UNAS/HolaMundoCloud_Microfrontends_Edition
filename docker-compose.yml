@@ -20,7 +20,20 @@ services:
       context: ./main-app
     ports:
       - "3000:3000"
+    volumes:
+      - ./main-app/build:/usr/src/app/build  # Mount the build directory to the container to access static files during development
     restart: always
+    networks:
+      - nodejs-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    ports:
+      - "3000:3000"  # Expose port 80 of the Nginx container to port 80 on the host machine
+    volumes:
+      - ./main-app/nginx.conf:/etc/nginx/nginx.conf  # Mount a custom Nginx config file
+      - ./main-app/build:/usr/share/nginx/html  # Mount the build directory to Nginx's web root
     networks:
       - nodejs-network
 
