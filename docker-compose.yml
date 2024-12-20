@@ -1,3 +1,10 @@
+networks:
+  nodejs-network:
+    driver: bridge
+
+volumes:
+  prometheus_data: {}
+
 services:
   backend:
     build:
@@ -12,21 +19,8 @@ services:
     build:
       context: ./main-app
     ports:
-      - "3000:3000"  # Keep React app container on port 3000
-    volumes:
-      - ./main-app/build:/usr/src/app/build  # Mount the build directory to the container to access static files during development
+      - "3000:3000"
     restart: always
-    networks:
-      - nodejs-network
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx-container
-    ports:
-      - "80:3000"  # Map Nginx container port 3000 to host port 80
-    volumes:
-      - ./main-app/nginx.conf:/etc/nginx/nginx.conf  # Mount a custom Nginx config file
-      - ./main-app/build:/usr/share/nginx/html  # Mount the build directory to Nginx's web root
     networks:
       - nodejs-network
 
@@ -74,10 +68,3 @@ services:
       - 9090:9090
     networks:
       - nodejs-network
-
-networks:
-  nodejs-network:
-    driver: bridge
-
-volumes:
-  prometheus_data: {}

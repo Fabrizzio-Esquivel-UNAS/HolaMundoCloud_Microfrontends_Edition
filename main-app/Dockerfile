@@ -1,29 +1,20 @@
-# Build Stage: Use Node.js to build the React application
-FROM node:18-alpine AS build
+# Use an official Node.js runtime as the base image
+FROM node:18-alpine
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json files
+# Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./
 
-# Install dependencies
+# Install Node.js dependencies
 RUN yarn install
 
-# Copy the rest of the application files
+# Copy the rest of the application files to the working directory
 COPY . .
 
-# Build the React application
-RUN yarn build
-
-# Serve Stage: Use Nginx to serve the React build
-FROM nginx:latest
-
-# Copy the React build files to Nginx's default HTML directory
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
-
-# Expose Nginx port
+# Expose the port your app will run on
 EXPOSE 3000
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Command to run the application
+CMD ["npm", "start"]

@@ -29,7 +29,7 @@ resource "aws_api_gateway_integration" "gateway_1_method_1" {
   http_method = aws_api_gateway_method.gateway_1_method_1.http_method
   type                    = "HTTP"
   integration_http_method = "ANY"
-  uri                     = "http://${aws_instance.ecs_instance_1.public_ip}/"  
+  uri                     = "http://${aws_instance.ecs_instance_1.public_ip}:3030/"  
 }
 
 resource "aws_api_gateway_method_response" "gateway_1_method_1" {
