@@ -28,12 +28,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: |
-          echo "Running as user $(whoami)"
-          echo "INSTALLING NPM ......"
-          npm install
-
   deploy:
     runs-on: ubuntu-latest
     needs: install-dependencies
