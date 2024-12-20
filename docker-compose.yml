@@ -1,0 +1,31 @@
+networks:
+  nodejs-network:
+    driver: bridge
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3030:3030"
+    restart: always
+    networks:
+      - nodejs-network
+
+  main-app:
+    build:
+      context: ./main-app
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - nodejs-network
+
+  sub-app:
+    build:
+      context: ./sub-app
+    ports:
+      - "3001:3001"
+    restart: always
+    networks:
+      - nodejs-network
