@@ -17,7 +17,7 @@ function App() {
     setSubAppsLoaded(true);
     loadMicroApp({
         name: 'sub1 app',
-        entry: 'http://18.226.177.42',
+        entry: 'http://18.226.177.42:3001',
         container: subApp1Ref.current,
         props: { title: 'Sub App 1' },
       });
