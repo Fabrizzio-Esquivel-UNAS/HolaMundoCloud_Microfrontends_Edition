@@ -4,7 +4,7 @@ if (document.getElementById('fetch-message')){
     document.getElementById('fetch-message').addEventListener('click', function() {
         // Call the API when the button is clicked
         console.log("Clicked")
-        fetch('http://3.144.8.160:3030/message') // Replace with your actual API endpoint
+        fetch('http://18.226.177.42:3030/message') // Replace with your actual API endpoint
             .then(response => response.json()) // Assuming the response is in JSON format
             .then(data => {
             // Display the message in the <p> element with id="message"

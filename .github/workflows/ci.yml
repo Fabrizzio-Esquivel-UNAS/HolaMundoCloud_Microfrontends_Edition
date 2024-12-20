@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  EC2_HOST: 3.144.8.160
+  EC2_HOST: 18.226.177.42
 
 jobs:
   install-dependencies:
